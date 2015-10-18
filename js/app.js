@@ -62,10 +62,17 @@ ngApp.controller('CtrlHome', ['$scope', '$location', function($scope, $location)
 }]);
 
 ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $location) {
-    var nearbyUsers;
+    $scope.nearbyUsers;
+    var usersList;
     $scope.startSearch = function() {
+        // Grabs userlist
+        fbTableUsers.on("value", function(snapshot) {
+            usersList = snapshot.val();
+            console.log("stores the user list: " + usersList);
+        });
+
         // Resets nearbyUsers
-        nearbyUsers = [];
+        $scope.nearbyUsers = [];
         var userLat = $.cookie('sessionLat');
         var userLong = $.cookie('sessionLong');
 
@@ -82,26 +89,28 @@ ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $locatio
             for (var key in geoList) {
                 if (geoList.hasOwnProperty(key) && key != username) {
                     var geoObject = geoList[key];
-                    distanceBetween(userLat, userLong, geoObject.lat, geoObject.long, key)
+                    distanceBetween(userLat, userLong, geoObject.lat, geoObject.long, key);
                 }
             }
+            console.log('end read');
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
         });
     }
 
     var distanceBetween = function(lat1, long1, lat2, long2, key) {
-        console.log('distance between is running');
+        console.log('distance between is running: ' + key);
         var input = [lat1, long1, lat2, long2, "mile"];
         var test = Algorithmia.client("simWnDmQFImOkx4R+tUS3kVkKJC1")
             .algo("algo://Geo/LatLongDistance/0.1.0")
             .pipe(input)
             .then(function(output) {
                 if (output.result < 1.5)
-                    nearbyUsers.push(key);
+                    $scope.nearbyUsers.push(usersList[key]);
                 else
                     console.log('too far');
-                console.log(nearbyUsers);
+                $scope.nearbyUsers = shuffle($scope.nearbyUsers)
+                $scope.$apply();
             });
     }
 }]);
@@ -115,6 +124,8 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
         var checkSummoner = {summonerName : verified};
         debugMsg('sent verify request');
         fbTableVerify.child(summonerName).set(checkSummoner);
+        $location.path( "/login" );
+        location.reload();
     }
 
 
@@ -135,6 +146,10 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
         // Creates a new child with an id of the username, and the results are the userObject
         fbTableUsers.child($scope.ngInputUsername).set(userObject);
         debugMsg('User object successfully created.')
+        $.cookie('sessionLoggedIn', true, { expires: 14, path: '/' });
+        $.cookie('sessionUsername', userObject.userName, { expires: 14, path: '/' });
+        $.cookie('sessionSummonerId', userObject.summonerId, { expires: 14, path: '/' });
+        $scope.checkLoggedIn = true;
     }
 }]);
 
@@ -179,3 +194,23 @@ ngApp.controller('CtrlLogout', ['$scope', '$location', function($scope, $locatio
     $location.path( "/login" );
     location.reload()
 }]);
+
+
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex ;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
