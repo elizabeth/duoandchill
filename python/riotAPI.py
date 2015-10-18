@@ -8,10 +8,8 @@ Created on Sat Oct 17 20:45:34 2015
 import urllib2
 import json
 import re
-#import sys
 
 riot_api = '81a78d77-5aee-4133-bf67-b34f05295fa3'
-patch = 5.20
 
 
 #Returns summoner ID of passed ign if it exists. Otherwise raises error.
