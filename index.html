@@ -27,8 +27,8 @@
                     <li role="presentation" ng-class="{ active: isActive('/') }"><a href="#/">Home</a></li>
                     <!-- Show if logged in -->
                     <li role="presentation" ng-class="{ active: isActive('/friend/') }" ng-show="loggedIn"><a href="#/friend">Friend Finder</a></li>
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }" ng-show="loggedIn"><a href="#/register">Chats</a></li>
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }" ng-show="loggedIn"><a href="#/register">Profile</a></li>
+                    <!--<li role="presentation" ng-class="{ active: isActive('/register/') }" ng-show="loggedIn"><a href="#/register">Chats</a></li>-->
+                    <li role="presentation" ng-class="{ active: isActive('/profile/') }" ng-show="loggedIn"><a href="#/profile">Profile</a></li>
 
                     <!-- Show if not logged in -->
                     <li role="presentation" ng-class="{ active: isActive('/login/') }" ng-show="!loggedIn"><a href="#/login">Login</a></li>
