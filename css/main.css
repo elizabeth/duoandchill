@@ -1,3 +1,7 @@
+.center-block {
+    float: none;
+}
+
 #error {
 	margin: 2em;
 }
