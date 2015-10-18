@@ -5,7 +5,8 @@
         <title>duo&chill</title>
 
         <!-- Bootstrap Stylesheet-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 
         <!-- your stylesheet -->
@@ -26,16 +27,16 @@
                 <ul class="nav navbar-nav">
                     <li role="presentation" ng-class="{ active: isActive('/') }"><a href="#/">Home</a></li>
                     <!-- Show if logged in -->
-                    <li role="presentation" ng-class="{ active: isActive('/friend/') }"><a href="#/friend">Friend Finder</a></li>
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Chats</a></li>
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Profile</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/friend/') }" ng-show="loggedIn"><a href="#/friend">Friend Finder</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }" ng-show="loggedIn"><a href="#/register">Chats</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }" ng-show="loggedIn"><a href="#/register">Profile</a></li>
 
                     <!-- Show if not logged in -->
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Login</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/login/') }" ng-show="!loggedIn"><a href="#/login">Login</a></li>
                     <!-- Show if logged in -->
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Logout</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/logout/') }" ng-show="loggedIn"><a href="#/logout">Logout</a></li>
                     <!-- Will remove -->
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Register</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }" ng-show="!loggedIn"><a href="#/register">Register</a></li>
                 </ul>
             </div>
         </div>
@@ -56,7 +57,9 @@
     <!-- Angular Route 1.4.2 -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.js"></script>
     <!-- CryptoJS SHA-3 -->
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
+    <script src="//crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
+    <!-- JQuery Cookie -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
     <!-- your script file -->
     <script src="js/main.js"></script>
