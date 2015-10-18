@@ -66,7 +66,10 @@ ngApp.controller('CtrlNav', ['$scope', '$location', function($scope, $location) 
 }]);
 
 ngApp.controller('CtrlHome', ['$scope', '$location', function($scope, $location) {
-    // This controller is intentionally left blank.
+    if($.cookie('sessionLoggedIn')) {
+        $location.path( "/profile" );
+        location.reload();
+    }
 }]);
 
 ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $location) {
