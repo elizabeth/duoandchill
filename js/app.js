@@ -17,6 +17,10 @@ ngApp.config(function($routeProvider) {
             templateUrl: 'views/home.html',
             controller: 'CtrlHome'
         })
+        .when('/friend/', {
+            templateUrl: 'views/friend.html',
+            controller: 'CtrlFriend'
+        })
         .when('/register/', {
             templateUrl: 'views/register.html',
             controller: 'CtrlRegister'
@@ -41,6 +45,7 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
             'userName' : $scope.ngInputUsername,
             'summonerName' : $scope.ngInputSummonerName,
             'summonerId' : '1111111',
+            'summonerIcon' : '121212',
             'emailAddress' : $scope.ngInputEmail,
             'password' : CryptoJS.SHA3($scope.ngInputPassword)
         };
