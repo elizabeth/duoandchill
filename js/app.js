@@ -109,7 +109,7 @@ ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $locatio
                     $scope.nearbyUsers.push(usersList[key]);
                 else
                     console.log('too far');
-                $scope.nearbyUsers = shuffle($scope.nearbyUsers)
+                //$scope.nearbyUsers = shuffle($scope.nearbyUsers)
                 $scope.$apply();
             });
     }
