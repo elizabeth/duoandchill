@@ -8,7 +8,7 @@
             <button class="btn btn-lg btn-info" ng-click="startSearch()">Start Search</button>
             <div class="row" ng-repeat="user in nearbyUsers">
                 <div class="col-md-2">
-                    <img src="img/avatar.jpg">
+                    <img ng-src="{{user.summonerIcon}}">
                 </div>
                 <div class="col-md-9">
                     <h3>{{user.userName}}</h3>

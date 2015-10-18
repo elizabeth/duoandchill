@@ -44,6 +44,10 @@ ngApp.config(function($routeProvider) {
             templateUrl: 'views/profile.html',
             controller: 'CtrlProfile'
         })
+        .when('/about/', {
+            templateUrl: 'views/about.html',
+            controller: 'CtrlAbout'
+        })
 });
 
 
@@ -62,7 +66,7 @@ ngApp.controller('CtrlNav', ['$scope', '$location', function($scope, $location) 
 }]);
 
 ngApp.controller('CtrlHome', ['$scope', '$location', function($scope, $location) {
-
+    // This controller is intentionally left blank.
 }]);
 
 ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $location) {
@@ -228,6 +232,10 @@ ngApp.controller('CtrlProfile', ['$scope', '$location', function($scope, $locati
     fbTableUsers.child(userName).once('value', function(rawUserObject) {
         console.log(rawUserObject.val());
     });
+}]);
+
+ngApp.controller('CtrlAbout', ['$scope', '$location', function($scope, $location) {
+    // This controller is intentionally left blank.
 }]);
 
 function shuffle(array) {
