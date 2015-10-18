@@ -18,7 +18,7 @@
                 <label class="input-group-addon" for="input-summoner-name">Summoner Name</label>
                 <input type="text" class="form-control" name="inputSummonerName" id="input-summoner-name" ng-model="ngInputSummonerName" ng-disabled="verifyStatus == 'success'" ng-maxlength="16" placeholder="Summoner Name" ng-model-options="{updateOn: 'default blur'}" required>
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="verifySummoner()" ng-disabled="ngInputSummonerName.length == 0 || ngInputSummonerName == null || verifyStatus == 'pending'">Verify<span ng-show="verifyStatus == 'pending'">ing <i class="fa fa-spinner fa-pulse"></i></span></button>
+                    <button class="btn btn-default" type="button" ng-click="verifySummoner()" ng-disabled="ngInputSummonerName.length == 0 || ngInputSummonerName == null || verifyStatus == 'pending' || verifyStatus == 'success'">Verify<span ng-show="verifyStatus == 'pending'">ing <i class="fa fa-spinner fa-pulse"></i></span></button>
                 </span>
             </div>
             <!-- Success -->
@@ -42,11 +42,11 @@
                 <input type="password" class="form-control" name="inputPassword" id="input-password" ng-model="ngInputPassword" placeholder="Password" ng-model-options="{updateOn: 'default blur'}" ng-minlength="7" required>
             </div>
             <!-- Success -->
-            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="ngInputPassword.length > 7"></span>
+            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="ngInputPassword.length >= 7"></span>
             <!-- Errors -->
             <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(ngInputPassword == null) && formRegister.inputPassword.$touched"></span>
             <div class="text-danger" ng-show="(ngInputPassword == null) && formRegister.inputPassword.$touched"> Please enter a password (min: 7 chars).</div>
         </div>
-        <button type="submit" class="btn btn-success btn-lg center-block" ng-disabled="formRegister.$invalid || formRegister.$error.length > 0" ng-click="registerUser()">Register</button>
+        <button type="submit" class="btn btn-success btn-lg center-block" ng-disabled="formRegister.$invalid || formRegister.$error.length > 0 || verifyStatus == 'failed'" ng-click="registerUser()">Register</button>
     </form>
 </container>
