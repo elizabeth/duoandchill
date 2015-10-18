@@ -145,11 +145,10 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
         console.log(userObject);
         // Creates a new child with an id of the username, and the results are the userObject
         fbTableUsers.child($scope.ngInputUsername).set(userObject);
-        debugMsg('User object successfully created.')
-        $.cookie('sessionLoggedIn', true, { expires: 14, path: '/' });
-        $.cookie('sessionUsername', userObject.userName, { expires: 14, path: '/' });
-        $.cookie('sessionSummonerId', userObject.summonerId, { expires: 14, path: '/' });
-        $scope.checkLoggedIn = true;
+        debugMsg('User object successfully created.');
+        $location.path( "/login" );
+        location.reload();
+
     }
 }]);
 
