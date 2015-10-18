@@ -40,6 +40,10 @@ ngApp.config(function($routeProvider) {
             templateUrl: 'views/logout.html',
             controller: 'CtrlLogout'
         })
+        .when('/profile/', {
+            templateUrl: 'views/profile.html',
+            controller: 'CtrlProfile'
+        })
 });
 
 
@@ -161,8 +165,8 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
         var userObject = {
             'userName' : $scope.ngInputUsername,
             'summonerName' : $scope.ngInputSummonerName,
-            'summonerId' : '1111111',
-            'summonerIcon' : '121212',
+            'summonerId' : $scope.summonerId,
+            'summonerIcon' : $scope.summonerIcon,
             'emailAddress' : $scope.ngInputEmail,
             'password' : hashPass
         };
@@ -182,7 +186,7 @@ ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location
     $scope.checkLoggedIn;
     $scope.login = function () {
         var hashPass = CryptoJS.SHA3($scope.ngInputPassword).toString();
-        var getUser = fbTableUsers.child($scope.ngInputUsername).once('value', function(rawUserObject) {
+        fbTableUsers.child($scope.ngInputUsername).once('value', function(rawUserObject) {
             userObject = rawUserObject.val();
             if (userObject == null) {
                 $scope.loginError = true;
@@ -219,6 +223,12 @@ ngApp.controller('CtrlLogout', ['$scope', '$location', function($scope, $locatio
     location.reload()
 }]);
 
+ngApp.controller('CtrlProfile', ['$scope', '$location', function($scope, $location) {
+    var userName = $.cookie('sessionUsername');
+    fbTableUsers.child(userName).once('value', function(rawUserObject) {
+        console.log(rawUserObject.val());
+    });
+}]);
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex ;
