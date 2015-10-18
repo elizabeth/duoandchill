@@ -10,6 +10,8 @@ var debugMsg = function(msg) {
 //  Create Angular App
 var ngApp = angular.module('ngApp', ['ngRoute']);
 
+var fbTableUsers = new Firebase('https://duoandchill-db.firebaseio.com/users');
+
 // Stores route information
 ngApp.config(function($routeProvider) {
     $routeProvider
@@ -48,26 +50,54 @@ ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $locatio
 }]);
 
 ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $location) {
-    var myDataRef = new Firebase('https://duoandchill-db.firebaseio.com/');
+    // Stores to variables
+    //var tempTableUsers = new Firebase('https://duoandchill-db.firebaseio.com/users');
 
+
+
+    // Creates the user object
     $scope.registerUser = function() {
+        var hashPass = CryptoJS.SHA3($scope.ngInputPassword).toString();
+
         var userObject = {
             'userName' : $scope.ngInputUsername,
             'summonerName' : $scope.ngInputSummonerName,
             'summonerId' : '1111111',
             'summonerIcon' : '121212',
             'emailAddress' : $scope.ngInputEmail,
-            'password' : CryptoJS.SHA3($scope.ngInputPassword)
+            'password' : hashPass
         };
 
         console.log(userObject);
-        myDataRef.push(userObject);
+        // Creates a new child with an id of the username, and the results are the userObject
+        fbTableUsers.child($scope.ngInputUsername).set(userObject);
         debugMsg('User object successfully created.')
     }
 }]);
 
 ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location) {
-    $scope.login = function() {
+    $scope.loginError = false;
+    $scope.login = function () {
+        var hashPass = CryptoJS.SHA3($scope.ngInputPassword).toString();
+        var getUser = fbTableUsers.child($scope.ngInputUsername).once('value', function(rawUserObject) {
+            userObject = rawUserObject.val()
+            if (userObject == null) {
+                $scope.loginError = true;
+                debugMsg('user does not exist');
+            }
+            else { // checks password
+                if (hashPass == userObject.password) {
+                    $scope.loginError = false;
+                    debugMsg('password matches, log user in')
+                }
+                else {
+                    debugMsg('password does not match - throw error');
+                    $scope.loginError = true;
+                    $scope.ngInputPassword = '';
+                }
+            }
+            $scope.$apply();
 
+        });
     }
 }]);
