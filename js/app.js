@@ -7,10 +7,14 @@ var debugMsg = function(msg) {
       console.log('!!! DEBUG !!! ' + msg);
 };
 
+var loggedIn;
+
 //  Create Angular App
 var ngApp = angular.module('ngApp', ['ngRoute']);
 
 var fbTableUsers = new Firebase('https://duoandchill-db.firebaseio.com/users');
+var fbTableVerify = new Firebase('https://duoandchill-db.firebaseio.com/verified');
+
 
 // Stores route information
 ngApp.config(function($routeProvider) {
@@ -37,8 +41,15 @@ ngApp.config(function($routeProvider) {
         })
 });
 
+
+
 // Header (Nav Bar)
 ngApp.controller('CtrlNav', ['$scope', '$location', function($scope, $location) {
+    $scope.loggedIn;
+    if($.cookie('sessionLoggedIn'))
+        $scope.loggedIn = true;
+    else
+        $scope.loggedIn = false;
     $scope.isActive = function (viewLocation) {
         var active = (viewLocation === $location.path());
         return active;
@@ -56,7 +67,13 @@ ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $locatio
 ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $location) {
     // Stores to variables
     //var tempTableUsers = new Firebase('https://duoandchill-db.firebaseio.com/users');
-
+    $scope.verifySummoner = function() {
+        var verified = {'verified' : 'pending'};
+        var summonerName = $scope.ngInputSummonerName;
+        var checkSummoner = {summonerName : verified};
+        debugMsg('sent verify request');
+        fbTableVerify.child(summonerName).set(checkSummoner);
+    }
 
 
     // Creates the user object
@@ -81,6 +98,7 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
 
 ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location) {
     $scope.loginError = false;
+    $scope.checkLoggedIn;
     $scope.login = function () {
         var hashPass = CryptoJS.SHA3($scope.ngInputPassword).toString();
         var getUser = fbTableUsers.child($scope.ngInputUsername).once('value', function(rawUserObject) {
@@ -95,6 +113,8 @@ ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location
                     $.cookie('sessionLoggedIn', true, { expires: 14, path: '/' });
                     $.cookie('sessionUsername', userObject.username, { expires: 14, path: '/' });
                     $.cookie('sessionSummonerId', userObject.summonerId, { expires: 14, path: '/' });
+                    $scope.checkLoggedIn = true;
+                    location.reload()
                     debugMsg('password matches, log user in')
                 }
                 else {
@@ -113,4 +133,6 @@ ngApp.controller('CtrlLogout', ['$scope', '$location', function($scope, $locatio
     $.removeCookie('sessionLoggedIn', { path: '/' });
     $.removeCookie('sessionUsername', { path: '/' });
     $.removeCookie('sessionSummonerId', { path: '/' });
+    $location.path( "/login" );
+    location.reload()
 }]);

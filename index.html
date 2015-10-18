@@ -27,16 +27,16 @@
                 <ul class="nav navbar-nav">
                     <li role="presentation" ng-class="{ active: isActive('/') }"><a href="#/">Home</a></li>
                     <!-- Show if logged in -->
-                    <li role="presentation" ng-class="{ active: isActive('/friend/') }"><a href="#/friend">Friend Finder</a></li>
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Chats</a></li>
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Profile</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/friend/') }" ng-show="loggedIn"><a href="#/friend">Friend Finder</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }" ng-show="loggedIn"><a href="#/register">Chats</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }" ng-show="loggedIn"><a href="#/register">Profile</a></li>
 
                     <!-- Show if not logged in -->
-                    <li role="presentation" ng-class="{ active: isActive('/login/') }"><a href="#/login">Login</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/login/') }" ng-show="!loggedIn"><a href="#/login">Login</a></li>
                     <!-- Show if logged in -->
-                    <li role="presentation" ng-class="{ active: isActive('/logout/') }"><a href="#/logout">Logout</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/logout/') }" ng-show="loggedIn"><a href="#/logout">Logout</a></li>
                     <!-- Will remove -->
-                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Register</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }" ng-show="!loggedIn"><a href="#/register">Register</a></li>
                 </ul>
             </div>
         </div>
