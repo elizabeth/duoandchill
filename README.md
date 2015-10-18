@@ -22,9 +22,6 @@ Ricky Chai: rcdesu12@gmail.com
 Evan Frawley: evanfrawley@gmail.com
 
 
-Krishang Swami: krishangswami@gmail.com
-
-
 ## About
 
 The majority of our team is comprised of officers of UW's League of Legends club, the Purple Caster Minions. A recurring pain point of our organization has been establishing meaningful connections and a sense of community amongst our members outside of the game. Frequently, players engage others online, but are never able to put a face to the Summoner name. Duo&Chill encourages and incentivizes players to leave the comfort of their home and establish an organic relationship with around a shared passion: League of Legends.
