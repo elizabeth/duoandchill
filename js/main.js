@@ -1,6 +1,5 @@
 $(function() {
 	'use strict';
 
-
-	var myDataRef = new Firebase('https://vjdu7r50kwg.firebaseio-demo.com/');
+	var myDataRef = new Firebase('https://duoandchill-db.firebaseio.com/');
 });
