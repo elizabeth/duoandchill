@@ -31,6 +31,10 @@ ngApp.config(function($routeProvider) {
             templateUrl: 'views/login.html',
             controller: 'CtrlLogin'
         })
+        .when('/logout/', {
+            templateUrl: 'views/logout.html',
+            controller: 'CtrlLogout'
+        })
 });
 
 // Header (Nav Bar)
@@ -80,7 +84,7 @@ ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location
     $scope.login = function () {
         var hashPass = CryptoJS.SHA3($scope.ngInputPassword).toString();
         var getUser = fbTableUsers.child($scope.ngInputUsername).once('value', function(rawUserObject) {
-            userObject = rawUserObject.val()
+            userObject = rawUserObject.val();
             if (userObject == null) {
                 $scope.loginError = true;
                 debugMsg('user does not exist');
@@ -88,6 +92,9 @@ ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location
             else { // checks password
                 if (hashPass == userObject.password) {
                     $scope.loginError = false;
+                    $.cookie('sessionLoggedIn', true, { expires: 14, path: '/' });
+                    $.cookie('sessionUsername', userObject.username, { expires: 14, path: '/' });
+                    $.cookie('sessionSummonerId', userObject.summonerId, { expires: 14, path: '/' });
                     debugMsg('password matches, log user in')
                 }
                 else {
@@ -100,4 +107,10 @@ ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location
 
         });
     }
+}]);
+
+ngApp.controller('CtrlLogout', ['$scope', '$location', function($scope, $location) {
+    $.removeCookie('sessionLoggedIn', { path: '/' });
+    $.removeCookie('sessionUsername', { path: '/' });
+    $.removeCookie('sessionSummonerId', { path: '/' });
 }]);
