@@ -1,0 +1,29 @@
+<div id="error"><h1>Please enable location services</h1></div>
+<div class="container">
+    <div class="row">
+        <div id="nearby" class="col-md-6">
+            <h4>Listed by distance.</h4>
+            <ul id="nearbyList">
+
+            </ul>
+        </div>
+
+        <div id="display" class="col-md-6">
+            <div id="map"></div>
+            <div id="zoomLevel">
+                <select id="level">
+                    <option value="5">5 Miles</option>
+                    <option value="10">10 miles</option>
+                    <option value="15">15 miles</option>
+                    <option value="20">20 miles</option>
+                    <option value="25">25 miles</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bing Maps -->
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+<!-- your script file -->
+<script src="js/map.js"></script>

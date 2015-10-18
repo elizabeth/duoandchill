@@ -39,6 +39,10 @@ ngApp.controller('CtrlHome', ['$scope', '$location', function($scope, $location)
 
 }]);
 
+ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $location) {
+
+}]);
+
 ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $location) {
     $scope.registerUser = function() {
         var userObject = {
