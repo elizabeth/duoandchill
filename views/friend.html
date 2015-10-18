@@ -4,14 +4,14 @@
 <div class="container">
     <div class="row">
         <div id="nearby" class="col-md-6">
-            <button class="btn btn-lg btn-info" ng-click="startSearch()">Start Search for Local Summoners</button>
-            <div class="row" ng-repeat="user in nearbyUsers">
+            <button class="btn btn-lg btn-info" style="margin-bottom: 15px;" ng-click="startSearch()">Start Search for Local Summoners</button>
+            <div class="row" ng-repeat="user in nearbyUsers" style="margin-bottom: 15px;">
                 <div class="col-md-2">
                     <img ng-src="{{user.summonerIcon}}">
                 </div>
-                <div class="col-md-9">
-                    <h3 style="padding-top:0px;padding-bottom:10px;">{{user.userName}}</h3>
-                    <p>{{user.bio}}</p>
+                <div class="col-md-10">
+                    <h3 class="col-md-8 center-block" style="padding-top:0px;padding-bottom:10px;">{{user.userName}}</h3>
+                    <div class="col-md-8 center-block" style="word-wrap: break-word">{{user.bio}}</div>
                 </div>
             </div>
         </div>
