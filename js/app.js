@@ -115,6 +115,7 @@ ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location
                     $.cookie('sessionSummonerId', userObject.summonerId, { expires: 14, path: '/' });
                     $scope.checkLoggedIn = true;
                     location.reload()
+                    $location.path( "/friend" );
                     debugMsg('password matches, log user in')
                 }
                 else {
