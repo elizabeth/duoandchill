@@ -172,7 +172,8 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
             'summonerId' : $scope.summonerId,
             'summonerIcon' : $scope.summonerIcon,
             'emailAddress' : $scope.ngInputEmail,
-            'password' : hashPass
+            'password' : hashPass,
+            'bio' : ''
         };
 
         console.log(userObject);
@@ -229,9 +230,24 @@ ngApp.controller('CtrlLogout', ['$scope', '$location', function($scope, $locatio
 
 ngApp.controller('CtrlProfile', ['$scope', '$location', function($scope, $location) {
     var userName = $.cookie('sessionUsername');
+    $scope.userProfile;
+    $scope.storeBio;
     fbTableUsers.child(userName).once('value', function(rawUserObject) {
-        console.log(rawUserObject.val());
+        $scope.userProfile = rawUserObject.val();
+        console.log(rawUserObject.val().bio);
+        $scope.storeBio = rawUserObject.val().bio;
+        $scope.$apply();
     });
+
+    $scope.updateBio = function() {
+        var tempBio = $scope.storeBio;
+        fbTableUsers.child(userName).once('value', function(rawUserObject) {
+            var fbEditBio = new Firebase('https://duoandchill-db.firebaseio.com/users/' + $.cookie('sessionUsername'));
+            fbEditBio.child('bio').set(tempBio);
+            $location.path( "/profile" );
+            location.reload();
+        });
+    }
 }]);
 
 ngApp.controller('CtrlAbout', ['$scope', '$location', function($scope, $location) {
