@@ -14,6 +14,7 @@ var ngApp = angular.module('ngApp', ['ngRoute']);
 
 var fbTableUsers = new Firebase('https://duoandchill-db.firebaseio.com/users');
 var fbTableVerify = new Firebase('https://duoandchill-db.firebaseio.com/verified');
+var fbTableGeo = new Firebase('https://duoandchill-db.firebaseio.com/geo');
 
 
 // Stores route information
@@ -61,7 +62,48 @@ ngApp.controller('CtrlHome', ['$scope', '$location', function($scope, $location)
 }]);
 
 ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $location) {
+    var nearbyUsers;
+    $scope.startSearch = function() {
+        // Resets nearbyUsers
+        nearbyUsers = [];
+        var userLat = $.cookie('sessionLat');
+        var userLong = $.cookie('sessionLong');
 
+
+        // Displays loading screen, hides button
+        $scope.searchInProgress = true;
+
+        // Pulls from the list of active summo
+        var username = $.cookie('sessionUsername');
+
+        fbTableGeo.on("value", function(snapshot) {
+            var geoList = snapshot.val();
+            console.log(geoList);
+            for (var key in geoList) {
+                if (geoList.hasOwnProperty(key) && key != username) {
+                    var geoObject = geoList[key];
+                    distanceBetween(userLat, userLong, geoObject.lat, geoObject.long, key)
+                }
+            }
+        }, function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
+    }
+
+    var distanceBetween = function(lat1, long1, lat2, long2, key) {
+        console.log('distance between is running');
+        var input = [lat1, long1, lat2, long2, "mile"];
+        var test = Algorithmia.client("simWnDmQFImOkx4R+tUS3kVkKJC1")
+            .algo("algo://Geo/LatLongDistance/0.1.0")
+            .pipe(input)
+            .then(function(output) {
+                if (output.result < 1.5)
+                    nearbyUsers.push(key);
+                else
+                    console.log('too far');
+                console.log(nearbyUsers);
+            });
+    }
 }]);
 
 ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $location) {
@@ -111,7 +153,7 @@ ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location
                 if (hashPass == userObject.password) {
                     $scope.loginError = false;
                     $.cookie('sessionLoggedIn', true, { expires: 14, path: '/' });
-                    $.cookie('sessionUsername', userObject.username, { expires: 14, path: '/' });
+                    $.cookie('sessionUsername', userObject.userName, { expires: 14, path: '/' });
                     $.cookie('sessionSummonerId', userObject.summonerId, { expires: 14, path: '/' });
                     $scope.checkLoggedIn = true;
                     location.reload()
