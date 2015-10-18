@@ -25,6 +25,10 @@ ngApp.config(function($routeProvider) {
             templateUrl: 'views/register.html',
             controller: 'CtrlRegister'
         })
+        .when('/login/', {
+            templateUrl: 'views/login.html',
+            controller: 'CtrlLogin'
+        })
 });
 
 // Header (Nav Bar)
@@ -56,5 +60,11 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
 
         console.log(userObject);
         debugMsg('User object successfully created.')
+    }
+}]);
+
+ngApp.controller('CtrlLogin', ['$scope', '$location', function($scope, $location) {
+    $scope.login = function() {
+
     }
 }]);
