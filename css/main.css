@@ -8,7 +8,7 @@ body {
     float: none;
 }
 
-#home {
+#home, #about {
 	text-align: center;
 }
 
