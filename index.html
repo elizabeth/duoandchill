@@ -25,7 +25,16 @@
                     Duo And Chill</a>
                 <ul class="nav navbar-nav">
                     <li role="presentation" ng-class="{ active: isActive('/') }"><a href="#/">Home</a></li>
+                    <!-- Show if logged in -->
                     <li role="presentation" ng-class="{ active: isActive('/friend/') }"><a href="#/friend">Friend Finder</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Chats</a></li>
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Profile</a></li>
+
+                    <!-- Show if not logged in -->
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Login</a></li>
+                    <!-- Show if logged in -->
+                    <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Logout</a></li>
+                    <!-- Will remove -->
                     <li role="presentation" ng-class="{ active: isActive('/register/') }"><a href="#/register">Register</a></li>
                 </ul>
             </div>
