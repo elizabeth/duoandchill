@@ -1,0 +1,32 @@
+#error {
+	margin: 2em;
+}
+
+.container {
+	display: none;
+}
+
+#nearby {
+	text-align: center;
+}
+
+#map {
+	margin-left: auto;
+	margin-right: auto
+	width: 500px;
+}
+
+#zoomLevel {
+	margin-top: 1em;
+	text-align: center;	
+}
+
+.col-md-6 {
+	margin-top: 2em;
+}
+
+#display {
+}
+
+#nearby {
+}
