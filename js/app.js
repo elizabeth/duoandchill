@@ -118,12 +118,39 @@ ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $locatio
 ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $location) {
     // Stores to variables
     //var tempTableUsers = new Firebase('https://duoandchill-db.firebaseio.com/users');
+    $scope.summonerId;
+    $scope.summonerIcon;
+
     $scope.verifySummoner = function() {
-        var verified = {'verified' : 'pending'};
+        console.log('verify is now running');
+        $scope.verifyStatus = 'pending';
         var summonerName = $scope.ngInputSummonerName;
-        var checkSummoner = {summonerName : verified};
+        var checkSummoner = {'verified' : 'pending'};
         debugMsg('sent verify request');
         fbTableVerify.child(summonerName).set(checkSummoner);
+
+        // code to check for verification
+        var checkTable = new Firebase('https://duoandchill-db.firebaseio.com/verified/');
+        checkTable.on('child_changed', function(snapshot) {
+
+            if (snapshot.val().verified && snapshot.val().summonerId && snapshot.val().summonerIcon) {
+                if (snapshot.val().verified == 'verified') {
+                    $scope.summonerId = snapshot.val().summonerId;
+                    $scope.summonerIcon = snapshot.val().summonerIcon;
+                    $scope.verifyStatus = 'success';
+
+                } else {
+                    $scope.verifyStatus = 'failed';
+                }
+
+            }
+
+            if (snapshot.val().verified == 'failed')
+                $scope.verifyStatus = 'failed';
+            $scope.$apply();
+            console.log(snapshot.val());
+        })
+
     }
 
 

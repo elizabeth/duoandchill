@@ -13,12 +13,12 @@
             <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(ngInputUsername.length == 0 || ngInputUsername == null) && formRegister.inputUsername.$touched"></span>
             <div class="text-danger" ng-show="(ngInputUsername.length == 0 || ngInputUsername == null) && formRegister.inputUsername.$touched"> Please enter in a username.</div>
         </div>
-        <div class="form-group has-feedback" ng-class="{'has-error': (ngInputSummonerName.length == 0 || ngInputSummonerName == null) && formRegister.inputSummonerName.$touched, 'has-success': ngInputSummonerName.length > 0}">
+        <div class="form-group has-feedback" ng-class="{'has-error': (ngInputSummonerName.length == 0 || ngInputSummonerName == null || verifyStatus == 'failed') && (formRegister.inputSummonerName.$touched), 'has-success': verifyStatus == 'success'}">
             <div class="input-group">
                 <label class="input-group-addon" for="input-summoner-name">Summoner Name</label>
-                <input type="text" class="form-control" name="inputSummonerName" id="input-summoner-name" ng-model="ngInputSummonerName" ng-maxlength="16" placeholder="Summoner Name" ng-model-options="{updateOn: 'default blur'}" required>
+                <input type="text" class="form-control" name="inputSummonerName" id="input-summoner-name" ng-model="ngInputSummonerName" ng-disabled="verifyStatus == 'success'" ng-maxlength="16" placeholder="Summoner Name" ng-model-options="{updateOn: 'default blur'}" required>
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="verifySummoner()">Verify</button>
+                    <button class="btn btn-default" type="button" ng-click="verifySummoner()" ng-disabled="ngInputSummonerName.length == 0 || ngInputSummonerName == null || verifyStatus == 'pending'">Verify<span ng-show="verifyStatus == 'pending'">ing <i class="fa fa-spinner fa-pulse"></i></span></button>
                 </span>
             </div>
             <!-- Success -->
