@@ -124,8 +124,6 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
         var checkSummoner = {summonerName : verified};
         debugMsg('sent verify request');
         fbTableVerify.child(summonerName).set(checkSummoner);
-        $location.path( "/login" );
-        location.reload();
     }
 
 
