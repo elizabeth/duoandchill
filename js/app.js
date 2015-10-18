@@ -26,9 +26,7 @@ ngApp.config(function($routeProvider) {
 // Header (Nav Bar)
 ngApp.controller('CtrlNav', ['$scope', '$location', function($scope, $location) {
     $scope.isActive = function (viewLocation) {
-        debugMsg('viewLocation: ' + viewLocation);
         var active = (viewLocation === $location.path());
-        debugMsg('active: ' + active);
         return active;
     };
 }]);
@@ -38,5 +36,16 @@ ngApp.controller('CtrlHome', ['$scope', '$location', function($scope, $location)
 }]);
 
 ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $location) {
+    $scope.registerUser = function() {
+        var userObject = {
+            'userName' : $scope.ngInputUsername,
+            'summonerName' : $scope.ngInputSummonerName,
+            'summonerId' : '1111111',
+            'emailAddress' : $scope.ngInputEmail,
+            'password' : CryptoJS.SHA3($scope.ngInputPassword)
+        };
 
+        console.log(userObject);
+        debugMsg('User object successfully created.')
+    }
 }]);
