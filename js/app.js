@@ -27,6 +27,9 @@ ngApp.config(function($routeProvider) {
         })
 });
 
+
+
+
 // Header (Nav Bar)
 ngApp.controller('CtrlNav', ['$scope', '$location', function($scope, $location) {
     $scope.isActive = function (viewLocation) {
@@ -44,6 +47,8 @@ ngApp.controller('CtrlFriend', ['$scope', '$location', function($scope, $locatio
 }]);
 
 ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $location) {
+    var myDataRef = new Firebase('https://duoandchill-db.firebaseio.com/');
+
     $scope.registerUser = function() {
         var userObject = {
             'userName' : $scope.ngInputUsername,
@@ -55,6 +60,7 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
         };
 
         console.log(userObject);
+        myDataRef.push(userObject);
         debugMsg('User object successfully created.')
     }
 }]);
