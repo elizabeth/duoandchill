@@ -3,8 +3,10 @@ DubHacks 2015 - Duo&Chill
 
 
 ## Links
-[DubHacks](http://15f.dubhacks.co/)
-[Live](http://duoandchill.me/)
+[DubHacks Website](http://15f.dubhacks.co/)
+
+
+[Live Website](http://duoandchill.me/)
 
 
 ## Created by:
