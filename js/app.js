@@ -134,6 +134,7 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
 
     $scope.verifySummoner = function() {
         console.log('verify is now running');
+        fbTableVerify.child($scope.ngInputSummonerName).remove();
         $scope.verifyStatus = 'pending';
         var summonerName = $scope.ngInputSummonerName;
         var checkSummoner = {'verified' : 'pending'};
@@ -182,6 +183,7 @@ ngApp.controller('CtrlRegister', ['$scope', '$location', function($scope, $locat
         console.log(userObject);
         // Creates a new child with an id of the username, and the results are the userObject
         fbTableUsers.child($scope.ngInputUsername).set(userObject);
+        fbTableVerify.child($scope.ngInputSummonerName).remove();
         debugMsg('User object successfully created.');
         $location.path( "/login" );
         location.reload();
