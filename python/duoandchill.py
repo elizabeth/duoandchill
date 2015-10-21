@@ -8,7 +8,7 @@ from firebase import firebase
 
 class user():
     global riot_api
-    riot_api = '802644f0-1229-4fe5-94ab-88373a1b7a52'
+    riot_api = 'bc9af8a1-b341-41e2-b17a-ce442b493c4a'
 
     #Returns summoner ID of passed ign if it exists. Otherwise raises error.
     def exists(self, ign):
@@ -53,7 +53,8 @@ def main_loop():
 
 if __name__ == '__main__':
     try:
-        main_loop()
+	print "working blah blah test"
+	main_loop()
     except KeyboardInterrupt:
         print >> sys.stderr, '\nExiting by user request.\n'
         sys.exit(0)

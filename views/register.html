@@ -1,0 +1,52 @@
+<h3 class="text-center"><img alt="duo&chill" src="img/logo.png" width="90px" height="60px"> - Registration</h3>
+
+<container class="col-md-8 center-block">
+    <form name="formRegister" id="form-registration" class="form" novalidate="true">
+        <div class="form-group has-feedback" ng-class="{'has-error': (ngInputUsername.length == 0 || ngInputUsername == null) && formRegister.inputUsername.$touched, 'has-success': ngInputUsername.length > 0}">
+            <div class="input-group">
+                <label class="input-group-addon" for="input-username">Username</label>
+                <input type="text" class="form-control" name="inputUsername" id="input-username" ng-model="ngInputUsername" ng-maxlength="16" placeholder="Username" ng-model-options="{updateOn: 'default blur'}" required>
+            </div>
+            <!-- Success -->
+            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="ngInputUsername.length > 0"></span>
+            <!-- Errors -->
+            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(ngInputUsername.length == 0 || ngInputUsername == null) && formRegister.inputUsername.$touched"></span>
+            <div class="text-danger" ng-show="(ngInputUsername.length == 0 || ngInputUsername == null) && formRegister.inputUsername.$touched"> Please enter in a username.</div>
+        </div>
+        <div class="form-group has-feedback" ng-class="{'has-error': (ngInputSummonerName.length == 0 || ngInputSummonerName == null || verifyStatus == 'failed') && (formRegister.inputSummonerName.$touched), 'has-success': verifyStatus == 'success'}">
+            <div class="input-group">
+                <label class="input-group-addon" for="input-summoner-name">Summoner Name</label>
+                <input type="text" class="form-control" name="inputSummonerName" id="input-summoner-name" ng-model="ngInputSummonerName" ng-disabled="verifyStatus == 'success'" ng-maxlength="16" placeholder="Summoner Name" ng-model-options="{updateOn: 'default blur'}" required>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="verifySummoner()" ng-disabled="ngInputSummonerName.length == 0 || ngInputSummonerName == null || verifyStatus == 'pending' || verifyStatus == 'success'">Verify<span ng-show="verifyStatus == 'pending'">ing <i class="fa fa-spinner fa-pulse"></i></span></button>
+                </span>
+            </div>
+            <!-- Success -->
+            <!-- Errors -->
+            <div class="text-danger" ng-show="(ngInputSummonerName.length == 0 || ngInputSummonerName == null) && formRegister.inputSummonerName.$touched"> Please enter a valid summoner name.</div>
+        </div>
+        <div class="form-group has-feedback" ng-class="{'has-error': (ngInputEmail.length == 0 || ngInputEmail == null || formRegister.inputEmail.$invalid) && (formRegister.inputEmail.$touched), 'has-success': formRegister.inputEmail.$valid }">
+            <div class="input-group">
+                <label class="input-group-addon" for="input-email">Email Address</label>
+                <input type="email" class="form-control" name="inputEmail" id="input-email" ng-model="ngInputEmail" placeholder="Email Address" ng-model-options="{updateOn: 'default blur'}" required>
+            </div>
+            <!-- Success -->
+            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="(ngInputEmail.length != 0 || ngInputEmail != null) && formRegister.inputEmail.$valid"></span>
+            <!-- Errors -->
+            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(ngInputEmail.length == 0 || ngInputEmail == null || formRegister.inputEmail.$invalid) && formRegister.inputEmail.$touched"></span>
+            <div class="text-danger" ng-show="(ngInputEmail.length == 0 || ngInputEmail == null || formRegister.inputEmail.$invalid) && formRegister.inputEmail.$touched"> Please enter a valid email address.</div>
+        </div>
+        <div class="form-group has-feedback" ng-class="{'has-error': (ngInputPassword.length < 7 || ngInputPassword == null) && formRegister.inputPassword.$touched, 'has-success': ngInputPassword.length > 7}">
+            <div class="input-group">
+                <label class="input-group-addon" for="input-password">Password</label>
+                <input type="password" class="form-control" name="inputPassword" id="input-password" ng-model="ngInputPassword" placeholder="Password" ng-model-options="{updateOn: 'default blur'}" ng-minlength="7" required>
+            </div>
+            <!-- Success -->
+            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="ngInputPassword.length >= 7"></span>
+            <!-- Errors -->
+            <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="(ngInputPassword == null) && formRegister.inputPassword.$touched"></span>
+            <div class="text-danger" ng-show="(ngInputPassword == null) && formRegister.inputPassword.$touched"> Please enter a password (min: 7 chars).</div>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg center-block" ng-disabled="formRegister.$invalid || formRegister.$error.length > 0 || verifyStatus == 'failed'" ng-click="registerUser()">Register</button>
+    </form>
+</container>

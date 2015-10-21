@@ -1,0 +1,41 @@
+<h3 class="text-center"><img alt="duo&chill" src="img/logo.png" width="90px" height="60px"> - Friend Finder</h3>
+
+<div id="error"><h2>Please enable location services</h2></div>
+<div class="container">
+    <div class="row">
+        <div id="nearby" class="col-md-6">
+            <button class="btn btn-lg btn-info" style="margin-bottom: 15px;" ng-click="startSearch()">Start Search for Local Summoners</button>
+            <div class="row" ng-repeat="user in nearbyUsers" style="margin-bottom: 15px;">
+                <div class="col-md-2">
+                    <img ng-src="{{user.summonerIcon}}">
+                </div>
+                <div class="col-md-10">
+                    <h3 class="col-md-8 center-block" style="padding-top:0px;padding-bottom:10px;">{{user.userName}}</h3>
+                    <div class="col-md-8 center-block" style="word-wrap: break-word">{{user.bio}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="display" class="col-md-6">
+            <div id="map"></div>
+            <div id="zoomLevel">
+                <div class="text-center">
+                    <button id="default" class="btn btn-md btn-default">Reset</button>
+
+                    <select id="level" class="form-control">
+                        <option type="text" value="1.5">1.5 Miles</option>
+                    <!--    <option type="text" value="10">10 miles</option>
+                        <option value="15">15 miles</option>
+                        <option value="20">20 miles</option>
+                        <option value="25">25 miles</option>
+     -->            </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bing Maps -->
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+<!-- your script file -->
+<script src="js/map.js"></script>

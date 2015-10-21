@@ -1,0 +1,20 @@
+<h3 class="text-center"><img alt="duo&chill" src="img/logo.png" width="90px" height="60px"> - Login</h3>
+
+<container class="col-md-8 center-block" ng-show="!checkLoggedIn">
+    <div class="alert alert-danger" role="alert" ng-show="loginError"><i class="fa fa-exclamation-triangle"></i> Error: Incorrect Username or Password!</div>
+    <form name="formLogin" id="form-login" class="form" novalidate="true">
+        <div class="form-group">
+            <label for="input-username" class="control-label">Username</label>
+            <input type="text" class="form-control" id="input-username" ng-model="ngInputUsername" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="input-password">Password</label>
+            <input type="password" class="form-control" id="input-password" ng-model="ngInputPassword" placeholder="Password">
+        </div>
+        <button class="btn btn-info btn-lg center-block" ng-click="login()">Login</button>
+    </form>
+</container>
+
+<container class="col-md-8 center-block" ng-show="checkLoggedIn">
+    You have successfully logged in!
+</container>

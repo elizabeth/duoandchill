@@ -1,0 +1,56 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+body {
+	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.center-block {
+    float: none;
+}
+
+#home, #about {
+	text-align: center;
+}
+
+#error {
+	margin: 2em;
+}
+
+.container {
+	display: none;
+}
+
+#nearby {
+	text-align: center;
+}
+
+#default {
+	margin-left: 1em;
+}
+
+#map {
+	margin-left: auto;
+	margin-right: auto
+	width: 500px;
+}
+
+#zoomLevel {
+	margin-bottom: 1em;
+	margin-top: 1em;
+	text-align: center;	
+}
+
+#level {
+	display: inline;
+	width: 100px;
+}
+
+.col-md-6 {
+	margin-top: 2em;
+}
+
+#display {
+}
+
+#nearby {
+}

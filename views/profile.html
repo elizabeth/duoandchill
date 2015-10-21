@@ -1,0 +1,19 @@
+<h3 class="text-center"><img alt="duo&chill" src="img/logo.png" width="90px" height="60px"> - Profile</h3>
+
+<container class="col-md-8 center-block">
+    <form name="formProfile" id="form-profile" class="form" novalidate="true">
+        <div class="row" style="margin-bottom:15px;">
+            <div class="col-md-3">
+                <img ng-src="{{userProfile.summonerIcon}}">
+            </div>
+            <div class="col-md-9">
+                <h2>{{userProfile.userName}}</h2>
+                <h3>{{userProfile.summonerName}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <textarea class="form-control" rows="10" ng-model="storeBio">{{storeBio}}</textarea>
+            <button class="btn btn-info btn-lg center-block" ng-click="updateBio()">Update Bio</button>
+        </div>
+    </form>
+</container>
