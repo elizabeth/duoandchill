@@ -10,16 +10,16 @@ DubHacks 2015 - Duo&Chill
 
 
 ## Created by:
-Stephen Rimbakusumo: srimbakusumo@gmail.com
+Stephen Rimbakusumo
 
 
-Elizabeth Duong: elizabethduong96@gmail.com
+Elizabeth Duong
 
 
-Ricky Chai: rcdesu12@gmail.com
+Ricky Chai
 
 
-Evan Frawley: evanfrawley@gmail.com
+Evan Frawley
 
 
 ## About
